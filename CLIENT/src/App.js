@@ -1,6 +1,9 @@
 import "./App.css";
 import io from "socket.io-client";
+import Chat from "./Chat";
 import { useState } from "react";
+import { Input } from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 
 const socket = io.connect("http://localhost:3001");
 
@@ -13,18 +16,33 @@ function App() {
     }
   };
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Enter your name"
-        onChange={(event) => setusername(event.target.value)}
-      ></input>
-      <input
-        type="text"
-        placeholder="Enter room name"
-        onChange={(event) => setroom(event.target.value)}
-      ></input>
-      <button onClick={join_room}>JOIN ROOM</button>
+    <div className="flex flex-col  mx-auto h-screen   justify-center items-center  w-[500px]">
+      <div className="flex flex-col gap-5 bg-gray-200  w-[300px] h-[300px] p-[20px] rounded-md shadow shadow-current pt-[40px]">
+        <h1 className="text-center text-4xl font-semibold tracking-wide">LIVE CHAT</h1>
+        <Input
+          className="bg-white"
+          variant="outlined"
+          color="black"
+          label="User Name"
+          placeholder="Enter your username"
+          id="username"
+          name="username"
+          onChange={(event) => setusername(event.target.value)}
+        />
+        <Input
+          className="bg-white"
+          variant="outlined"
+          color="black"
+          label="Room"
+          placeholder="Enter the room name"
+          id="room"
+          name="room"
+          onChange={(event) => setroom(event.target.value)}
+        />
+
+        <Button onClick={join_room}>JOIN ROOM</Button>
+        <Chat socket={socket} username={username}></Chat>
+      </div>
     </div>
   );
 }
