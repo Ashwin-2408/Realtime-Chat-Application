@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Chip } from "@material-tailwind/react";
 import { Input } from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 const Chat = ({ socket, username, room }) => {
   const [message, setmessage] = useState("");
   const [recieved_messages, setrecieved_messages] = useState([]);
@@ -31,11 +32,11 @@ const Chat = ({ socket, username, room }) => {
     });
   }, [socket]);
   return (
-    <div className="flex flex-col w-[350px] h-[350px] bg-[#ffffff]   relative rounded-md shadow-xl">
-      <div className="basis-1/12 bg-[#ffffff] rounded-md ">
-        <h1 className=" flex justify-center font-semibold text-2xl">{room}</h1>
+    <div className="flex flex-col w-[350px] h-[330px] bg-[#ffffff]   relative rounded-md shadow-xl">
+      <div className="basis-1/8 bg-[#ffffff] rounded-2xl ">
+        <h1 className=" flex justify-center font-semibold font-serif text-2xl pt-2">{`Room:${room}`}</h1>
       </div>
-      <div className="flex flex-col overflow-y-scroll  basis-9/12 bg-[#eaedf1]">
+      <div className="flex flex-col overflow-y-scroll  basis-6/8 bg-[#eaedf1]">
         {recieved_messages.map((mess) => {
           if (mess.username === username) {
             return (
@@ -48,17 +49,26 @@ const Chat = ({ socket, username, room }) => {
           }
         })}
       </div>
-      <div className="flex flex-row absolute bottom-0 basis-2/12 ">
-        <input
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          type="text"
-          name="message"
-          id="message"
-          onChange={(event) => setmessage(event.target.value)}
-        ></input>
-        <button onClick={send_message}>Send</button>
+     
+        <div className="absolute flex w-full max-w-[24rem] flex-grow basis-1/8 bottom-0">
+          <Input
+            type="text"
+            name="message"
+            id="message"
+            onChange={(event) => setmessage(event.target.value)}
+            
+            
+            className="pr-20  flex-grow "
+            containerProps={{
+              className: "min-w-0",
+            }}
+          />
+          <Button size="sm" className="!absolute right-1 top-1 rounded" onClick={send_message}>
+            Send
+          </Button>
+        </div>
       </div>
-    </div>
+    
   );
 };
 
