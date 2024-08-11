@@ -18,7 +18,7 @@ function App() {
     }
   };
   return (
-    <div className="flex flex-col  mx-auto h-screen   justify-center items-center  ">
+    <div className="flex flex-col  mx-auto h-screen   justify-center items-center bg-[#f5e1da]  ">
       {!showchat ? (
         <div className="flex flex-col gap-5 bg-gray-200  w-[300px] h-[300px] p-[20px] rounded-md shadow shadow-current pt-[40px]">
           <h1 className="text-center text-4xl font-semibold tracking-wide">
