@@ -36,39 +36,41 @@ const Chat = ({ socket, username, room }) => {
       <div className="basis-1/8 bg-[#ffffff] rounded-2xl ">
         <h1 className=" flex justify-center font-semibold font-serif text-2xl pt-2">{`Room:${room}`}</h1>
       </div>
-      <div className="flex flex-col overflow-y-scroll  basis-6/8 bg-[#eaedf1]">
-        {recieved_messages.map((mess) => {
-          if (mess.username === username) {
-            return (
+      <div className="flex flex-col overflow-y-scroll basis-6/8 bg-[#eaedf1]">
+        {recieved_messages.map((message) => {
+          return (
+            <div class>
               <div>
-                <Chip value={mess.message} />
+              <p className="break-words">{message.message}</p>
               </div>
-            );
-          } else {
-            return <Chip value={mess.message} />;
-          }
+              <div>
+              <p>{message.time}</p>
+              </div>
+            </div>
+          );
         })}
       </div>
-     
-        <div className="absolute flex w-full max-w-[24rem] flex-grow basis-1/8 bottom-0">
-          <Input
-            type="text"
-            name="message"
-            id="message"
-            onChange={(event) => setmessage(event.target.value)}
-            
-            
-            className="pr-20  flex-grow "
-            containerProps={{
-              className: "min-w-0",
-            }}
-          />
-          <Button size="sm" className="!absolute right-1 top-1 rounded" onClick={send_message}>
-            Send
-          </Button>
-        </div>
+
+      <div className="absolute flex w-full max-w-[24rem] flex-grow basis-1/8 bottom-0">
+        <Input
+          type="text"
+          name="message"
+          id="message"
+          onChange={(event) => setmessage(event.target.value)}
+          className="pr-20  flex-grow "
+          containerProps={{
+            className: "min-w-0",
+          }}
+        />
+        <Button
+          size="sm"
+          className="!absolute right-1 top-1 rounded"
+          onClick={send_message}
+        >
+          Send
+        </Button>
       </div>
-    
+    </div>
   );
 };
 
